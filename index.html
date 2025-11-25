@@ -1,0 +1,1533 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <title>網站範本 | Site Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        /* =========================
+           基本設定
+           ========================= */
+        :root {
+            --bg: #0f172a;
+            --bg-alt: #020617;
+            --card: #020617;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.08);
+            --accent-strong: rgba(56, 189, 248, 0.22);
+            --border-subtle: rgba(148, 163, 184, 0.35);
+            --text-main: #e5e7eb;
+            --text-dim: #9ca3af;
+            --text-strong: #f9fafb;
+            --radius-xl: 1.5rem;
+            --radius-lg: 1rem;
+            --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+            --shadow-subtle: 0 10px 30px rgba(15, 23, 42, 0.7);
+            --blur-strong: blur(24px);
+            --nav-height: 72px;
+            --transition-fast: 150ms ease-out;
+            --transition-normal: 220ms ease-out;
+            --transition-slow: 320ms ease-out;
+            --container-max: 1120px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            sans-serif;
+            background: radial-gradient(circle at top, #1e293b 0, #020617 45%, #020617 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           Layout 通用
+           ========================= */
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 4.5rem 0;
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            section {
+                padding: 5.5rem 0;
+            }
+        }
+
+        .section-header {
+            margin-bottom: 2.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .section-kicker {
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 650;
+            color: var(--text-strong);
+        }
+
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            max-width: 520px;
+        }
+
+        /* =========================
+           Header / 導覽列
+           ========================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(14px);
+            background: linear-gradient(
+                    to bottom,
+                    rgba(15, 23, 42, 0.9),
+                    rgba(15, 23, 42, 0.7),
+                    transparent
+            );
+            border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .nav {
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-logo-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: radial-gradient(circle at 20% 0, #22d3ee 0, #0f172a 45%, #020617 100%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.45);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo-mark::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 0, rgba(248, 250, 252, 0.2), transparent 55%);
+            opacity: 0.75;
+            mix-blend-mode: screen;
+        }
+
+        .nav-logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.05rem;
+        }
+
+        .nav-title {
+            font-size: 1rem;
+            font-weight: 650;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--text-strong);
+        }
+
+        .nav-sub {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-dim);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            position: relative;
+            padding-bottom: 0.1rem;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.2rem;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(to right, #38bdf8, #22c55e);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-strong);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            padding: 0.45rem 1rem;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.05), transparent 55%);
+            color: var(--text-main);
+            cursor: pointer;
+            transition: transform var(--transition-fast),
+            box-shadow var(--transition-fast),
+            border-color var(--transition-fast),
+            background var(--transition-fast);
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #22c55e);
+            border-color: transparent;
+            color: #0b1120;
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.35);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px) translateZ(0);
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+            border-color: rgba(148, 163, 184, 0.8);
+            background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.09), transparent 55%);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 20px 45px rgba(59, 130, 246, 0.6);
+        }
+
+        .btn-ghost {
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        /* 手機選單 */
+        .nav-toggle {
+            display: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: rgba(15, 23, 42, 0.8);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .nav-toggle-line {
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--text-main);
+            position: relative;
+            transition: background var(--transition-fast);
+        }
+
+        .nav-toggle-line::before,
+        .nav-toggle-line::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--text-main);
+            transition: transform var(--transition-normal), top var(--transition-normal), opacity var(--transition-fast);
+        }
+
+        .nav-toggle-line::before {
+            top: -6px;
+        }
+
+        .nav-toggle-line::after {
+            top: 6px;
+        }
+
+        .nav-toggle.is-open .nav-toggle-line {
+            background: transparent;
+        }
+
+        .nav-toggle.is-open .nav-toggle-line::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .nav-toggle.is-open .nav-toggle-line::after {
+            top: 0;
+            transform: rotate(-45deg);
+        }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        .nav-mobile a {
+            padding: 0.25rem 0;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(30, 64, 175, 0.3);
+        }
+
+        .nav-mobile a:last-child {
+            border-bottom: none;
+        }
+
+        .nav-mobile-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links,
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
+            .nav-mobile {
+                display: flex;
+            }
+
+            .nav-mobile.is-hidden {
+                display: none;
+            }
+        }
+
+        /* =========================
+           Hero 區
+           ========================= */
+        .hero {
+            padding-top: 3.2rem;
+            padding-bottom: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding-top: 4rem;
+                padding-bottom: 5rem;
+            }
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 2.4rem;
+        }
+
+        @media (min-width: 900px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+                align-items: center;
+            }
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.22rem 0.7rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: radial-gradient(circle at 0 0, rgba(94, 234, 212, 0.18), transparent 70%);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 1.3rem;
+        }
+
+        .hero-pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 3vw + 1.4rem, 3.1rem);
+            line-height: 1.08;
+            font-weight: 750;
+            color: var(--text-strong);
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #38bdf8, #22c55e);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 0.98rem;
+            color: var(--text-dim);
+            max-width: 520px;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.9rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat strong {
+            font-size: 1.1rem;
+            color: var(--text-strong);
+            font-weight: 650;
+        }
+
+        .hero-card {
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-subtle);
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.26), transparent 65%),
+            radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.18), transparent 55%),
+            rgba(2, 6, 23, 0.92);
+            box-shadow: var(--shadow-soft);
+            padding: 1.4rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            /* subtle top highlight */
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.26), transparent 60%);
+            mix-blend-mode: soft-light;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .hero-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .hero-card-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-strong);
+        }
+
+        .hero-card-badge {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.45);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-dim);
+        }
+
+        .hero-card-body {
+            display: grid;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .hero-card-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .hero-card-label {
+            color: var(--text-dim);
+        }
+
+        .hero-card-value {
+            color: var(--text-strong);
+            font-weight: 500;
+        }
+
+        .hero-card-gradient {
+            position: absolute;
+            inset: -40%;
+            opacity: 0.65;
+            background:
+                    radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.3), transparent 55%),
+                    radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.3), transparent 55%);
+            filter: blur(48px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* =========================
+           About 區
+           ========================= */
+        .about-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 900px) {
+            .about-grid {
+                grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+                align-items: flex-start;
+            }
+        }
+
+        .about-text {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            display: grid;
+            gap: 1.1rem;
+        }
+
+        .about-highlight {
+            padding: 1.1rem 1.2rem;
+            border-radius: var(--radius-lg);
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.25), transparent 55%),
+            rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: var(--shadow-subtle);
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .about-highlight strong {
+            color: var(--text-strong);
+        }
+
+        .about-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        .about-list-item {
+            padding: 0.75rem 0.9rem;
+            border-radius: 0.9rem;
+            border: 1px dashed rgba(148, 163, 184, 0.5);
+            background: radial-gradient(circle at 0 0, rgba(30, 64, 175, 0.6), transparent 70%);
+            color: var(--text-main);
+        }
+
+        .about-list-item span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+
+        .about-right {
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(148, 163, 184, 0.32);
+            background: radial-gradient(circle at 0 0, rgba(59, 130, 246, 0.16), transparent 55%),
+            rgba(15, 23, 42, 0.96);
+            padding: 1rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .about-right-inner {
+            border-radius: calc(var(--radius-xl) - 0.4rem);
+            padding: 1.2rem 1.1rem 1.3rem;
+            border: 1px solid rgba(30, 64, 175, 0.65);
+            background: radial-gradient(circle at 0 100%, rgba(56, 189, 248, 0.26), transparent 65%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--text-strong);
+        }
+
+        .stat-item span {
+            color: var(--text-dim);
+        }
+
+        .timeline {
+            border-top: 1px dashed rgba(148, 163, 184, 0.5);
+            padding-top: 1rem;
+            margin-top: 0.6rem;
+            display: grid;
+            gap: 0.6rem;
+            font-size: 0.8rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+
+        .timeline-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+            margin-top: 0.25rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-text {
+            color: var(--text-main);
+        }
+
+        .timeline-text span {
+            display: block;
+            color: var(--text-dim);
+        }
+
+        /* =========================
+           Services / Features 區
+           ========================= */
+        .services-grid {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .service-card {
+            border-radius: 1rem;
+            padding: 1.1rem 1.1rem 1.2rem;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.26), transparent 60%),
+            rgba(15, 23, 42, 0.95);
+            box-shadow: var(--shadow-subtle);
+            display: grid;
+            gap: 0.65rem;
+            font-size: 0.86rem;
+        }
+
+        .service-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .service-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-strong);
+        }
+
+        .service-desc {
+            color: var(--text-dim);
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-top: 0.15rem;
+        }
+
+        .service-tag {
+            font-size: 0.7rem;
+            padding: 0.12rem 0.5rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: var(--text-dim);
+            background: rgba(15, 23, 42, 0.7);
+        }
+
+        /* =========================
+           Gallery / Projects 區
+           ========================= */
+        .projects-grid {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        .project-card {
+            border-radius: 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: var(--shadow-subtle);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 210px;
+            transform: translateZ(0);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal),
+            border-color var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px) translateZ(0);
+            box-shadow: 0 22px 40px rgba(15, 23, 42, 0.9);
+            border-color: rgba(56, 189, 248, 0.7);
+        }
+
+        .project-thumb {
+            position: relative;
+            height: 120px;
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.45), transparent 55%),
+            radial-gradient(circle at 100% 100%, rgba(34, 197, 94, 0.34), transparent 55%),
+            linear-gradient(135deg, #0f172a, #020617);
+        }
+
+        .project-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            mix-blend-mode: soft-light;
+            background-image: linear-gradient(
+                    135deg,
+                    rgba(248, 250, 252, 0.08) 0,
+                    transparent 40%,
+                    rgba(248, 250, 252, 0.18) 55%,
+                    transparent 100%
+            ),
+            linear-gradient(
+                    to right,
+                    rgba(15, 23, 42, 0.1) 0,
+                    rgba(15, 23, 42, 0.9) 100%
+            );
+            opacity: 0.7;
+        }
+
+        .project-thumb-badge {
+            position: absolute;
+            left: 0.9rem;
+            top: 0.9rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: var(--text-main);
+        }
+
+        .project-meta {
+            padding: 0.9rem 1rem 1rem;
+            display: grid;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        .project-title {
+            font-size: 0.95rem;
+            color: var(--text-strong);
+            font-weight: 600;
+        }
+
+        .project-desc {
+            color: var(--text-dim);
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.4rem;
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        /* =========================
+           Contact 區
+           ========================= */
+        .contact-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        @media (min-width: 900px) {
+            .contact-grid {
+                grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+                align-items: flex-start;
+            }
+        }
+
+        .contact-form {
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.26), transparent 60%),
+            rgba(15, 23, 42, 0.98);
+            padding: 1.3rem 1.4rem 1.5rem;
+            box-shadow: var(--shadow-soft);
+            display: grid;
+            gap: 0.8rem;
+            font-size: 0.86rem;
+        }
+
+        .field {
+            display: grid;
+            gap: 0.25rem;
+        }
+
+        .field-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .field-input,
+        .field-textarea {
+            border-radius: 0.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.55);
+            background: rgba(15, 23, 42, 0.9);
+            padding: 0.6rem 0.75rem;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color var(--transition-fast),
+            box-shadow var(--transition-fast),
+            background var(--transition-fast);
+            resize: vertical;
+            min-height: 38px;
+        }
+
+        .field-textarea {
+            min-height: 80px;
+        }
+
+        .field-input:focus,
+        .field-textarea:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.6);
+            background: rgba(15, 23, 42, 0.96);
+        }
+
+        .contact-meta {
+            font-size: 0.86rem;
+            color: var(--text-dim);
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-meta-card {
+            padding: 0.95rem 1rem;
+            border-radius: 1rem;
+            border: 1px dashed rgba(148, 163, 184, 0.5);
+            background: radial-gradient(circle at 0 0, rgba(30, 64, 175, 0.8), transparent 70%);
+        }
+
+        .contact-meta-card strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-strong);
+            margin-bottom: 0.25rem;
+        }
+
+        /* =========================
+           Footer 區
+           ========================= */
+        footer {
+            padding: 1.5rem 0 2.2rem;
+            border-top: 1px solid rgba(15, 23, 42, 1);
+            background: radial-gradient(circle at top, #020617 0, #020617 100%);
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-inner {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            border-bottom: 1px dotted rgba(148, 163, 184, 0.6);
+            padding-bottom: 0.05rem;
+        }
+
+        /* =========================
+           動態效果：滾動 reveal
+           ========================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity var(--transition-slow), transform var(--transition-slow);
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal[data-delay="1"] {
+            transition-delay: 80ms;
+        }
+        .reveal[data-delay="2"] {
+            transition-delay: 160ms;
+        }
+        .reveal[data-delay="3"] {
+            transition-delay: 240ms;
+        }
+
+        /* =========================
+           回頂端按鈕
+           ========================= */
+        .back-to-top {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.75);
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.26), transparent 70%),
+            rgba(15, 23, 42, 0.92);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.9);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity var(--transition-normal), transform var(--transition-normal),
+            visibility var(--transition-normal);
+            z-index: 45;
+        }
+
+        .back-to-top span {
+            font-size: 1.1rem;
+        }
+
+        .back-to-top.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* =========================
+           小螢幕調整
+           ========================= */
+        @media (max-width: 600px) {
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .about-list {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header / Nav -->
+<header>
+    <div class="container">
+        <nav class="nav">
+            <div class="nav-left">
+                <div class="nav-logo-mark"></div>
+                <div class="nav-logo-text">
+                    <span class="nav-title">Studio Name</span>
+                    <span class="nav-sub">Web · Design · Dev</span>
+                </div>
+            </div>
+
+            <div class="nav-links">
+                <a href="#hero">首頁</a>
+                <a href="#about">關於</a>
+                <a href="#services">服務</a>
+                <a href="#projects">作品</a>
+                <a href="#contact">聯絡</a>
+            </div>
+
+            <div class="nav-cta">
+                <button class="btn btn-ghost" type="button">下載介紹</button>
+                <button class="btn btn-primary" type="button" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+                    立即洽談
+                </button>
+            </div>
+
+            <button class="nav-toggle" type="button" aria-label="切換選單">
+                <div class="nav-toggle-line"></div>
+            </button>
+        </nav>
+
+        <!-- Mobile Nav -->
+        <div class="nav-mobile is-hidden" id="navMobile">
+            <a href="#hero">首頁</a>
+            <a href="#about">關於</a>
+            <a href="#services">服務</a>
+            <a href="#projects">作品</a>
+            <a href="#contact">聯絡</a>
+            <div class="nav-mobile-buttons">
+                <button class="btn btn-ghost" type="button">下載介紹</button>
+                <button class="btn btn-primary" type="button" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">
+                    立即洽談
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Hero -->
+<main>
+    <section id="hero" class="hero">
+        <div class="container hero-grid">
+            <div class="reveal">
+                <div class="hero-tag">
+                    <span class="hero-pill-dot"></span>
+                    <span>Modern Web Template</span>
+                </div>
+                <h1 class="hero-title">
+                    建立<span>清晰且具層次</span>的網站視覺基底。
+                </h1>
+                <p class="hero-desc">
+                    這是一個可直接套用的單頁模板，包含導覽列、Hero 區、關於、服務、作品與聯絡表單，
+                    並附上滾動進場與回頂端互動，方便後續客製與擴充。
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" type="button">
+                        開始使用
+                    </button>
+                    <button class="btn btn-ghost" type="button" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">
+                        查看樣板區塊
+                    </button>
+                </div>
+
+                <div class="hero-meta">
+                    <div class="hero-stat">
+                        <strong>RWD</strong>
+                        <span>支援桌機與手機視窗</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>純前端</strong>
+                        <span>僅使用 HTML / CSS / JS</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>易修改</strong>
+                        <span>語意化區塊與變數</span>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="hero-card reveal" data-delay="1" aria-label="摘要卡片">
+                <div class="hero-card-gradient"></div>
+                <div class="hero-card-inner">
+                    <div class="hero-card-header">
+                        <div>
+                            <div class="hero-card-title">Template Snapshot</div>
+                            <div style="font-size:0.78rem;color:var(--text-dim);margin-top:0.2rem;">
+                                可作為個人頁、作品集或產品簡介基底。
+                            </div>
+                        </div>
+                        <div class="hero-card-badge">Preview</div>
+                    </div>
+
+                    <div class="hero-card-body">
+                        <div class="hero-card-row">
+                            <div class="hero-card-label">布局</div>
+                            <div class="hero-card-value">單頁式 / 區塊導向</div>
+                        </div>
+                        <div class="hero-card-row">
+                            <div class="hero-card-label">動態效果</div>
+                            <div class="hero-card-value">滾動 reveal · 回頂端 · 手機選單</div>
+                        </div>
+                        <div class="hero-card-row">
+                            <div class="hero-card-label">重點技術</div>
+                            <div class="hero-card-value">Flex / Grid / IntersectionObserver</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="container">
+            <header class="section-header reveal">
+                <div class="section-kicker">About</div>
+                <h2 class="section-title">網站用途與資訊結構</h2>
+                <p class="section-desc">
+                    以下區塊示範如何清楚分配「介紹文字」、「關鍵指標」、「可快速掃描的標籤」，
+                    方便後續替換成實際專案內容。
+                </p>
+            </header>
+
+            <div class="about-grid">
+                <div class="about-text reveal" data-delay="1">
+                    <p>
+                        這個模板預設為單頁式結構，適合放上個人介紹、服務流程、作品展示與聯絡方式。
+                        你可以直接把每個區段的 Lorem-style 文案替換成實際專案內容。
+                    </p>
+
+                    <div class="about-highlight">
+                        <strong>核心理念：</strong>
+                        <span>
+                以少量色彩與層次感強烈的深色背景，搭配清楚的版邊與間距，讓內容比視覺特效更突出。
+              </span>
+                    </div>
+
+                    <div class="about-list">
+                        <div class="about-list-item">
+                            清楚導航
+                            <span>頂部固定導覽列，快速跳轉區塊。</span>
+                        </div>
+                        <div class="about-list-item">
+                            區塊分層
+                            <span>每一段有明確標題與輔助描述。</span>
+                        </div>
+                        <div class="about-list-item">
+                            彈性版型
+                            <span>Grid / Flex 方便插入或删除卡片。</span>
+                        </div>
+                        <div class="about-list-item">
+                            簡易互動
+                            <span>純 JS 控制，無外部依賴。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-right reveal" data-delay="2">
+                    <div class="about-right-inner">
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <strong>6</strong>
+                                <span>主要區塊</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>0</strong>
+                                <span>外部套件</span>
+                            </div>
+                            <div class="stat-item">
+                                <strong>3</strong>
+                                <span>互動功能</span>
+                            </div>
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-text">
+                                    Section-based layout
+                                    <span>Hero · About · Services · Projects · Contact · Footer</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-text">
+                                    Responsive first
+                                    <span>使用 Grid / Flex 實作 Breakpoints，較少硬編 px 值。</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-text">
+                                    Animations
+                                    <span>IntersectionObserver 控制 reveal，避免單純 CSS 動畫不斷觸發。</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Features -->
+    <section id="services">
+        <div class="container">
+            <header class="section-header reveal">
+                <div class="section-kicker">Services</div>
+                <h2 class="section-title">可放服務項目或功能模組</h2>
+                <p class="section-desc">
+                    使用三欄卡片呈現，每張卡片包含 icon、標題、說明文字與標籤，方便快速掃描與比較。
+                </p>
+            </header>
+
+            <div class="services-grid">
+                <article class="service-card reveal" data-delay="1">
+                    <div class="service-icon">UI</div>
+                    <h3 class="service-title">介面規劃 / Wireframe</h3>
+                    <p class="service-desc">
+                        以使用情境為主的介面規劃，先確保資訊階層與操作流程清晰，再決定視覺風格與動態細節。
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">User Flow</span>
+                        <span class="service-tag">Wireframe</span>
+                    </div>
+                </article>
+
+                <article class="service-card reveal" data-delay="2">
+                    <div class="service-icon">FE</div>
+                    <h3 class="service-title">前端開發 / Component</h3>
+                    <p class="service-desc">
+                        使用語意化標籤與模組化樣式，方便拆出元件並整合到既有專案或框架中。
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">HTML / CSS / JS</span>
+                        <span class="service-tag">Responsive</span>
+                    </div>
+                </article>
+
+                <article class="service-card reveal" data-delay="3">
+                    <div class="service-icon">UX</div>
+                    <h3 class="service-title">互動 / 動態節奏</h3>
+                    <p class="service-desc">
+                        控制滾動進場、按鈕回饋與表單狀態，讓整體互動節奏穩定，不過度干擾內容閱讀。
+                    </p>
+                    <div class="service-tags">
+                        <span class="service-tag">Motion</span>
+                        <span class="service-tag">Micro Interaction</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects / Gallery -->
+    <section id="projects">
+        <div class="container">
+            <header class="section-header reveal">
+                <div class="section-kicker">Projects</div>
+                <h2 class="section-title">作品展示或案例列表</h2>
+                <p class="section-desc">
+                    以下為三張預設卡片，可替換為實際專案縮圖、名稱、描述與連結或標籤。
+                </p>
+            </header>
+
+            <div class="projects-grid">
+                <article class="project-card reveal" data-delay="1">
+                    <div class="project-thumb">
+                        <div class="project-thumb-overlay"></div>
+                        <div class="project-thumb-badge">Case · 01</div>
+                    </div>
+                    <div class="project-meta">
+                        <h3 class="project-title">產品 Landing Page</h3>
+                        <p class="project-desc">
+                            針對單一產品的介紹頁，聚焦關鍵賣點與 CTA 行動，引導使用者完成註冊或下載。
+                        </p>
+                        <div class="project-footer">
+                            <span>Web · Marketing</span>
+                            <span class="project-link">View &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-delay="2">
+                    <div class="project-thumb">
+                        <div class="project-thumb-overlay"></div>
+                        <div class="project-thumb-badge">Case · 02</div>
+                    </div>
+                    <div class="project-meta">
+                        <h3 class="project-title">個人作品集</h3>
+                        <p class="project-desc">
+                            以作品為核心的個人簡介頁，包含 Hero、簡歷摘要、作品卡片與聯絡方式。
+                        </p>
+                        <div class="project-footer">
+                            <span>Portfolio</span>
+                            <span class="project-link">View &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="project-card reveal" data-delay="3">
+                    <div class="project-thumb">
+                        <div class="project-thumb-overlay"></div>
+                        <div class="project-thumb-badge">Case · 03</div>
+                    </div>
+                    <div class="project-meta">
+                        <h3 class="project-title">活動 / 展覽頁</h3>
+                        <p class="project-desc">
+                            放置活動資訊、展覽主題、時程與報名方式，並搭配作品或攤位照片。
+                        </p>
+                        <div class="project-footer">
+                            <span>Event · Exhibition</span>
+                            <span class="project-link">View &rarr;</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <header class="section-header reveal">
+                <div class="section-kicker">Contact</div>
+                <h2 class="section-title">聯絡與合作</h2>
+                <p class="section-desc">
+                    以下表單僅為前端樣式，提交行為預設攔截。可依實際需求接後端或第三方服務。
+                </p>
+            </header>
+
+            <div class="contact-grid">
+                <form class="contact-form reveal" id="contactForm">
+                    <div class="field">
+                        <label class="field-label" for="name">稱呼 / Name</label>
+                        <input class="field-input" id="name" name="name" type="text" placeholder="輸入您的稱呼" />
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="email">Email</label>
+                        <input class="field-input" id="email" name="email" type="email" placeholder="your@email.com" />
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="topic">主題 / Topic</label>
+                        <input class="field-input" id="topic" name="topic" type="text" placeholder="合作、詢問或其他主題" />
+                    </div>
+
+                    <div class="field">
+                        <label class="field-label" for="message">訊息 / Message</label>
+                        <textarea class="field-textarea" id="message" name="message" placeholder="簡述需求或想討論的內容"></textarea>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">
+                        送出表單（前端示意）
+                    </button>
+                    <div id="formNotice" style="font-size:0.78rem;color:var(--text-dim);display:none;">
+                        表單已於前端攔截，請依實際需求串接後端或表單服務。
+                    </div>
+                </form>
+
+                <aside class="contact-meta reveal" data-delay="1">
+                    <div class="contact-meta-card">
+                        <strong>聯絡資訊</strong>
+                        <p>
+                            可於此處放入工作 Email、社群帳號或即時通訊方式，例如：
+                            <br />
+                            contact@yourstudio.com
+                        </p>
+                    </div>
+                    <div class="contact-meta-card">
+                        <strong>典型回覆內容</strong>
+                        <p>
+                            若有合作或專案諮詢，可在回信中提供預計時間、預算範圍與製作流程，
+                            讓彼此的期待與範圍更清楚。
+                        </p>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container footer-inner">
+        <div>© <span id="year"></span> Your Studio. All rights reserved.</div>
+        <div class="footer-links">
+            <a href="#hero">回到頂部</a>
+            <a href="#about">關於</a>
+            <a href="#contact">聯絡</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Back to top -->
+<button class="back-to-top" type="button" id="backToTop" aria-label="回到頂端">
+    <span>↑</span>
+</button>
+
+<script>
+    // 年份
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // 手機選單
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMobile = document.getElementById("navMobile");
+
+    if (navToggle && navMobile) {
+        navToggle.addEventListener("click", function () {
+            navToggle.classList.toggle("is-open");
+            navMobile.classList.toggle("is-hidden");
+        });
+
+        navMobile.addEventListener("click", function (e) {
+            if (e.target.tagName.toLowerCase() === "a") {
+                navToggle.classList.remove("is-open");
+                navMobile.classList.add("is-hidden");
+            }
+        });
+    }
+
+    // 滾動 reveal
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                root: null,
+                threshold: 0.18
+            }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+    } else {
+        revealEls.forEach((el) => el.classList.add("is-visible"));
+    }
+
+    // 回頂端按鈕
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", function () {
+        const y = window.scrollY || window.pageYOffset;
+        if (y > 450) {
+            backToTop.classList.add("is-visible");
+        } else {
+            backToTop.classList.remove("is-visible");
+        }
+    });
+
+    backToTop.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Contact form demo submit
+    const form = document.getElementById("contactForm");
+    const formNotice = document.getElementById("formNotice");
+    if (form && formNotice) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            formNotice.style.display = "block";
+        });
+    }
+</script>
+</body>
+</html>
