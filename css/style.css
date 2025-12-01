@@ -529,7 +529,7 @@
     opacity: 0.9;
 
     /* 如果是圖片煙霧，這裡換掉 background 即可 */
-    background-image: url("../img/smoke.png");
+    background-image: url("../img/smoke.PNG");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
