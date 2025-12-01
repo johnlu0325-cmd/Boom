@@ -41,7 +41,7 @@
 
 
     // Testimonials carousel
-    $('.testimonial-carousel').owlCarousel({
+    /*$('.testimonial-carousel').owlCarousel({
         autoplay: true,
         smartSpeed: 1000,
         loop: true,
@@ -49,7 +49,7 @@
         dots: true,
         items: 1,
         dotsData: true,
-    });
+    });*/
 
     
 })(jQuery);
